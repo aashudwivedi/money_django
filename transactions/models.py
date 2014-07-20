@@ -7,6 +7,10 @@ class Transaction(models.Model):
 
 
 class Split(models.Model):
-    transaction = models.ForeignKey(Transaction)
-    userId = models.CharField(max_length=255)
+    transaction = models.ForeignKey(Transaction, \
+                                    related_name='splits' )
+    userid = models.CharField(max_length=255)
     split = models.IntegerField()
+
+    class Meta:
+        unique_together = ('transaction', 'userid')
