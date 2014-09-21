@@ -7,11 +7,10 @@ from rest_framework.serializers import \
 class SplitSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Split
-        fields = ('transaction', 'userid', 'split')
+        fields = ('userid', 'split')
             
 class TransactionSerializer(serializers.ModelSerializer):
-    splits = HyperlinkedRelatedField(many=True, \
-                                    view_name='split-detail')
+    splits = SplitSerializer(many=True)
     
     class Meta:
         model = Transaction
